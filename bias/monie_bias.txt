@@ -1,0 +1,68 @@
+crime volume by hardship group
++--------------+------------+---------------+
+|hardship_group|total_crimes|avg_pct_poverty|
++--------------+------------+---------------+
+|          high|     2682740|           32.8|
+|        medium|     1968015|           22.9|
+|           low|     1846753|           14.5|
++--------------+------------+---------------+
+
+arrest rate by majority group
++-----------------+------------+----------+
+|   majority_group|total_crimes|arrest_pct|
++-----------------+------------+----------+
+|   majority_black|     3020585|     30.55|
+|majority_hispanic|     1059207|      26.1|
+|   majority_white|     1423306|     21.86|
+|            mixed|      994410|     25.58|
++-----------------+------------+----------+
+
+narcotics and violent crime share by majority group
++-----------------+-------+-------------+-----------+
+|   majority_group|  total|narcotics_pct|violent_pct|
++-----------------+-------+-------------+-----------+
+|   majority_black|3020585|        13.97|      33.03|
+|majority_hispanic|1059207|         7.96|      28.12|
+|   majority_white|1423306|         4.39|       20.2|
+|            mixed| 994410|          9.5|      26.16|
++-----------------+-------+-------------+-----------+
+
+arrest rate by income group
++------------+------------+----------+
+|income_group|total_crimes|arrest_pct|
++------------+------------+----------+
+|        high|     1347195|     22.66|
+|         low|     2841882|     27.24|
+|      medium|      608394|     20.17|
+|    very_low|     1700037|     33.11|
++------------+------------+----------+
+
+RMSE by majority group:
+  majority_black: RMSE 5.045 (n=558)
+  majority_hispanic: RMSE 4.731 (n=265)
+  majority_white: RMSE 4.555 (n=360)
+  mixed: RMSE 4.895 (n=258)
+
+RMSE by hardship group:
+  low: RMSE 4.613 (n=475)
+  medium: RMSE 4.843 (n=406)
+  high: RMSE 5.010 (n=560)
+
+average residual by majority group (positive = overprediction):
++-----------------+------------+---+
+|   majority_group|avg_residual|  n|
++-----------------+------------+---+
+|   majority_black|        1.92|558|
+|majority_hispanic|       2.612|265|
+|   majority_white|       3.015|360|
+|            mixed|       3.015|258|
++-----------------+------------+---+
+
+average residual by hardship group:
++--------------+------------+---+
+|hardship_group|avg_residual|  n|
++--------------+------------+---+
+|          high|        2.59|560|
+|           low|       2.927|475|
+|        medium|       1.938|406|
++--------------+------------+---+

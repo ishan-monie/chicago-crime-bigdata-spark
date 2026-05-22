@@ -1,0 +1,7 @@
+Task 1 Findings: Average Crime Events by Month
+
+Crime is highest in the summer months, peaking in July at around 34,500 average events, and lowest in February at about 25,000. The pattern is pretty consistent across all years in the dataset.
+
+The seasonal trend makes sense since warmer weather means more people are outside, which leads to more interactions and more opportunity for crime. February being the lowest is partly weather and partly just being the shortest month.
+
+The difference between the peak and the lowest month is close to 10,000 events on average, so month is clearly an important variable for any crime prediction model.

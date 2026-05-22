@@ -1,0 +1,85 @@
+Bias/Fairness Analysis
+
+ChatGPT Usage
+-------------
+ChatGPT was used to identify protected attributes and proxies in the dataset, flag variables to remove or use with caution, and develop a hypothesis about where fairness issues could arise in modeling. The prompt provided the full column list plus the two exogenous datasets and the prediction objective.
+
+ChatGPT correctly identified the key protected attributes (% Black, % Hispanic, % White from the demographic dataset) and flagged several strong proxies including Beat, District, Community Area, Block, latitude/longitude, poverty rate, per capita income, and hardship index. It also flagged Arrest as a variable that reflects policing decisions rather than just crime occurrence.
+
+One thing ChatGPT missed is that certain Primary Type categories like narcotics, prostitution, and gambling are almost entirely driven by proactive policing rather than victim reporting. The Task 4 results show narcotics and prostitution both have 99%+ arrest rates, confirming they reflect enforcement intensity more than actual crime levels. No attributes were incorrectly identified overall.
+
+
+Data Analysis
+-------------
+Two exogenous datasets were joined to the crime data:
+
+1. Census Data - Selected Socioeconomic Indicators in Chicago (2008-2012), from the Chicago Data Portal. Contains poverty rate, per capita income, unemployment, and hardship index for each of the 77 community areas, identified by community area number. This joins directly to the crime data on the Community Area field.
+
+2. ACS 5-Year Data by Community Area (2023), from the Chicago Data Portal (https://data.cityofchicago.org/Community-Economic-Development/ACS-5-Year-Data-by-Community-Area/t68z-cikk). Contains race and ethnicity population counts (White, Black or African American, Hispanic or Latino) by community area name. Since this file uses names rather than numbers, it was first joined to the socioeconomic file on community area name (with minor spelling normalization for 3 mismatched names), then the combined dataset was joined to the crime data on community area number.
+
+Crime volume by hardship group:
+  high hardship (avg poverty 32.8%):   2,682,740 crimes
+  medium hardship (avg poverty 22.9%): 1,968,015 crimes
+  low hardship (avg poverty 14.5%):    1,846,753 crimes
+
+Arrest rate by neighborhood majority group:
+  majority black:    30.55%
+  majority hispanic: 26.10%
+  majority white:    21.86%
+  mixed:             25.58%
+
+The gap between majority-black (30.55%) and majority-white (21.86%) neighborhoods is about 9 percentage points. Narcotics enforcement drives a lot of this -- majority-black areas have a 13.97% narcotics crime share vs 4.39% in majority-white areas, even though drug use rates are similar across groups nationally.
+
+Arrest rate by income group:
+  very low income: 33.11%
+  low income:      27.24%
+  medium income:   20.17%
+  high income:     22.66%
+
+Very low income neighborhoods have arrest rates more than 10 points above medium income areas, again largely driven by drug enforcement concentration in poorer areas. Bias in the data is present -- the target variable captures recorded crime, shaped by where police patrol, not just where crime occurs.
+
+
+Modeling Fairness
+-----------------
+Hypothesis: the model would overpredict crime in high-hardship and majority-minority beats due to heavier historical enforcement producing more recorded incidents per unit of actual crime.
+
+RMSE by majority group:
+  majority_black:    5.045
+  majority_hispanic: 4.731
+  majority_white:    4.555
+  mixed:             4.895
+
+RMSE by hardship group:
+  low:    4.613
+  medium: 4.843
+  high:   5.010
+
+Average residual by majority group (positive = overprediction):
+  majority_black:    1.920
+  majority_hispanic: 2.612
+  majority_white:    3.015
+  mixed:             3.015
+
+Average residual by hardship group:
+  high:   2.590
+  low:    2.927
+  medium: 1.938
+
+The hypothesis was partially supported. Majority-black beats have the highest RMSE at 5.045, consistent with more prediction error in high-enforcement areas. However the overprediction residuals tell a more nuanced story -- majority-white and mixed areas actually show higher average overprediction (3.015) than majority-black areas (1.920). This is likely because the test period falls in early 2020 when COVID caused an unusual crime drop that hit different areas differently.
+
+High hardship beats have both the highest RMSE (5.010) and moderate overprediction (2.590), which is consistent with the hypothesis that enforcement-driven volatility makes these areas harder to model accurately.
+
+The groups selected for evaluation were majority racial/ethnic group, hardship level, and income level, since these represent the main protected and proxy attributes identified in the ChatGPT analysis.
+
+
+Mitigation Suggestions
+-----------------------
+1. Use only victim-reported crimes as the target and exclude enforcement-dependent categories like narcotics. This reduces the impact of differential policing on model inputs.
+
+2. Evaluate RMSE separately by demographic group during model development, not just overall. This makes systematic errors visible earlier.
+
+3. Do not use arrest history as a feature since it reflects policing decisions and can amplify existing enforcement patterns.
+
+4. Be transparent that the model predicts recorded crime events, not all crime. Any deployment for resource allocation should acknowledge this distinction.
+
+5. Compare predictions against community surveys or 311 data to check whether outputs align with resident experiences across different neighborhoods.

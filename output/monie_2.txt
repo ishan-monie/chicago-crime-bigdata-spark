@@ -1,0 +1,64 @@
+top 10 blocks by crime events (2018-2020)
+
+1. 0000X W  — 7625
+2. 0000X E  — 7517
+3. 001XX N  — 6356
+4. 079XX S  — 5895
+5. 001XX W  — 4757
+6. 039XX W  — 4660
+7. 002XX W  — 4624
+8. 071XX S  — 4523
+9. 078XX S  — 4498
+10. 006XX N  — 4387
+
+beat pair correlations (2016-2020)
+
+beats 0411 and 1214: 1.0000
+beats 0522 and 1623: 0.9999
+beats 0423 and 0722: 0.9999
+beats 1933 and 1931: 0.9999
+beats 0722 and 2213: 0.9999
+beats 0532 and 1024: 0.9999
+beats 0822 and 1631: 0.9999
+beats 0835 and 0221: 0.9999
+beats 0714 and 0825: 0.9998
+beats 1524 and 0732: 0.9998
+beats 1524 and 0823: 0.9998
+beats 2521 and 1634: 0.9998
+beats 0431 and 1032: 0.9998
+beats 0423 and 2213: 0.9998
+beats 0113 and 0614: 0.9998
+beats 1933 and 2011: 0.9997
+beats 2514 and 1213: 0.9997
+beats 0411 and 1132: 0.9997
+beats 2521 and 0224: 0.9997
+beats 2031 and 0225: 0.9997
+
+daley (2001-2011) top crime types
+
+  THEFT: 970,325
+  BATTERY: 877,580
+  CRIMINAL DAMAGE: 563,938
+  NARCOTICS: 552,252
+  OTHER OFFENSE: 299,265
+  ASSAULT: 290,812
+  BURGLARY: 282,066
+  MOTOR VEHICLE THEFT: 233,891
+  ROBBERY: 178,678
+  DECEPTIVE PRACTICE: 150,652
+
+emanuel (2012-2019) top crime types
+
+  THEFT: 519,501
+  BATTERY: 410,322
+  CRIMINAL DAMAGE: 237,730
+  NARCOTICS: 175,362
+  ASSAULT: 150,872
+  OTHER OFFENSE: 138,495
+  DECEPTIVE PRACTICE: 135,774
+  BURGLARY: 117,144
+  MOTOR VEHICLE THEFT: 90,692
+  ROBBERY: 86,248
+
+daley total (11 yrs): 4,798,842 — avg 436,258/yr
+emanuel total (8 yrs): 2,248,118 — avg 281,014/yr

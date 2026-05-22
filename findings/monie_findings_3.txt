@@ -1,0 +1,11 @@
+Task 3 Findings: Crime Prediction at the Beat Level
+
+Two models were trained: Gradient Boosted Trees (GBT) and Random Forest (RF), both using lag features, a rolling average, week of year, month, and a violent crime ratio.
+
+Results:
+  GBT: RMSE 5.631, R2 0.448
+  RF:  RMSE 5.594, R2 0.456
+
+Random Forest performed slightly better on both metrics. An R2 of around 0.45 means the models explain about 45% of the variance in weekly beat-level counts. The RMSE of about 5.6 means predictions are off by around 5-6 crimes per week per beat on average.
+
+The lag features were the strongest predictors since recent crime history at a beat is the best signal for near-term activity. One thing to note is that the test set falls in early 2020, which was an unusual period due to COVID, so performance may be lower than it would be in a typical year.

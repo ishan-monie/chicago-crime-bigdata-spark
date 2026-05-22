@@ -1,0 +1,60 @@
+PROMPT
+------
+I have a Chicago crime dataset with 6 million events since 2001. The columns are: ID, Case Number, Date, Block, IUCR, Primary Type, Description, Location Description, Arrest, Domestic, Beat, District, Ward, Community Area, FBI Code, X Coordinate, Y Coordinate, Year, Updated On, Latitude, Longitude, Location. I also joined two exogenous datasets: socioeconomic indicators by community area (poverty rate, per capita income, hardship index) and demographic composition by community area (% Black, % Hispanic, % White).
+
+My objective is to predict the number of crime events in the next week at the beat level.
+
+1. Identify the protected attributes in this dataset, including proxy attributes
+2. Flag attributes that should be removed or used with caution
+3. Develop a hypothesis about where bias/fairness issues could arise in the modeling
+
+
+RESPONSE
+--------
+For this objective, the main fairness concern is that you are not predicting "true crime." You are predicting recorded crime events, which are shaped by policing patterns, reporting rates, surveillance intensity, neighborhood demographics, socioeconomic conditions, and historical enforcement. That matters a lot at the beat level.
+
+1. Protected attributes in the dataset
+
+The dataset does not appear to contain individual-level protected attributes like a person's race, sex, age, disability, or religion. However, it does contain area-level protected attributes and several strong proxies.
+
+The clearest protected attributes are from the demographic dataset:
+- % Black: direct area-level racial composition
+- % Hispanic: direct area-level ethnic/racial composition
+- % White: direct area-level racial composition
+
+These are not individual-level race variables, but they still represent protected class information at the neighborhood/community-area level. Using them directly in a crime prediction model can create serious disparate impact concerns.
+
+2. Proxy attributes for protected status
+
+Several variables can indirectly reveal race, ethnicity, income, segregation, or neighborhood disadvantage:
+- Community Area: race, ethnicity, income, historical segregation
+- Beat: race, income, policing intensity
+- District: race, income, enforcement patterns
+- Ward: political geography, neighborhood demographics
+- Block: very granular location, race/income proxies
+- Latitude, Longitude, Location: neighborhood demographics
+- X Coordinate, Y Coordinate: spatial proxies for protected communities
+- Location Description: socioeconomic activity patterns
+- Poverty rate: socioeconomic status, race due to structural inequality
+- Per capita income: socioeconomic status, race
+- Hardship index: concentrated disadvantage, race
+- Arrest: police enforcement intensity
+- IUCR, FBI Code, Primary Type, Description: enforcement/reporting patterns
+
+3. Attributes to remove or use with caution
+
+Remove: % Black, % Hispanic, % White, Case Number, ID, Updated On, Block, X/Y Coordinates, Latitude, Longitude
+
+Use with caution: Beat, District, Ward, Community Area, Poverty rate, Per capita income, Hardship index, Arrest, Primary Type/IUCR, Location Description, Domestic, Date/Year
+
+4. Hypothesis
+
+Bias may arise because the model learns patterns in recorded crime data that reflect unequal policing intensity, reporting behavior, and historical neighborhood disadvantage rather than only underlying crime risk. Since beat, community area, coordinates, poverty, hardship, income, and demographic composition are strongly correlated in Chicago, the model may assign higher predicted crime counts to predominantly Black, Hispanic, or low-income neighborhoods even when part of the signal comes from historical over-policing or differential reporting.
+
+Specific risks:
+- Historical policing bias can be learned by the model
+- Geographic variables can act as racial proxies even without explicit race variables
+- Socioeconomic variables can create a "poverty as risk" framing
+- Arrest-related variables can amplify enforcement bias
+- Reporting bias affects different crime categories differently
+- Feedback loops: predictions used for patrol allocation can increase recorded crime in targeted areas, which then becomes future training data

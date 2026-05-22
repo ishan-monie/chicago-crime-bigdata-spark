@@ -1,0 +1,16 @@
+Task 4 Findings: Arrest Patterns
+
+By Hour:
+Arrest rates are lowest in the early morning, bottoming out at 7am (17.7%). They jump around 11am (33.2%) and peak again from 8-9pm (around 33-34%). The 11am spike is likely related to narcotics arrests, which have a near 100% arrest rate and tend to happen during daytime patrol hours.
+
+By Day of Week:
+Midweek days (Tuesday through Thursday) have slightly higher arrest rates around 28%, while weekends sit closer to 26-27%. The differences are small across the week overall.
+
+By Month:
+Winter months actually have higher arrest rates despite lower total crime volume. January and February are both above 29-30% while summer months are around 25-26%. The mix of crime types shifts in winter, with more drug-related arrests pulling the percentage up.
+
+By Time of Day:
+Evening (6-9pm) has the highest arrest rate at 32.3% and morning is the lowest at 23.6%.
+
+By Crime Type:
+Narcotics (99.4%) and prostitution (99.6%) almost always result in arrest. Homicide is at 47% and battery and assault are both around 22-23%, meaning most physical altercations do not lead to an immediate arrest.

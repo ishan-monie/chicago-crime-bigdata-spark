@@ -1,0 +1,13 @@
+Task 2 Findings: Top Blocks, Beat Correlations, Mayor Comparison
+
+Part 1: Top 10 Blocks (2018-2020)
+
+The highest crime blocks are clustered around downtown Chicago, with addresses like 0000X W and 001XX N showing up at the top. The 079XX S block also appears, which is on the South Side. The downtown blocks are likely driven by retail and transit activity while the South Side block reflects residential crime.
+
+Part 2: Beat Correlations (2016-2020)
+
+Beats 0411 and 1214 came out with a perfect 1.0 correlation, and most of the top 20 pairs were above 0.999. The correlations are high enough that they seem to reflect a city-wide trend rather than purely local effects. Beats 0411 and 1214 are in different districts so they are not geographically adjacent, which supports that interpretation. The adjacency check was done using the CPD beat map at https://chicagopd.hub.arcgis.com.
+
+Part 3: Daley vs Emanuel
+
+Crime dropped significantly between the two mayors. Daley averaged about 436,000 crimes per year compared to Emanuel at 281,000, a reduction of around 35%. The biggest change was in narcotics, which fell from 552,252 under Daley to 175,362 under Emanuel. Theft remained the top crime type under both.
