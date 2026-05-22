@@ -44,7 +44,7 @@ hw3/
 Two exogenous datasets were joined to the crime data for the bias/fairness analysis:
 
 **1. Census Data - Selected Socioeconomic Indicators in Chicago (2008-2012)**
-Source: Chicago Data Portal
+Source: https://data.cityofchicago.org/Health-Human-Services/Census-Data-Selected-socioeconomic-indicators-in-C/kn9c-c2s2/about_data
 Contains poverty rate, per capita income, unemployment rate, and hardship index for each of Chicago's 77 community areas. Identified by community area number, so it joins directly to the crime data on the `Community Area` field.
 
 **2. ACS 5-Year Data by Community Area (2023)**
