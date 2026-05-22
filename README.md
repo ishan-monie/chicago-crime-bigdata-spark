@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-# Homework 3 - Crime in Chicago
+# Homework 3
 **Ishan Monie**
 
 ## Structure
