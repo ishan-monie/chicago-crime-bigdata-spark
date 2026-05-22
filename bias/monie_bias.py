@@ -55,7 +55,6 @@ acs = acs.withColumn("pct_black",    spark_round(100.0 * col("black_pop")    / c
 # join ACS onto socio via name to get community area number
 socio = socio.join(acs, on="community_area_name", how="left")
 
-# ── load crime data ───────────────────────────────────────────────────────────
 df = spark.read.csv(DATA_PATH, header=True, inferSchema=True).select(
     col("Beat").cast("string"),
     col("Community Area").cast("int").alias("community_area_num"),
@@ -68,7 +67,6 @@ df = spark.read.csv(DATA_PATH, header=True, inferSchema=True).select(
 # join socio+demo onto crime data via community area number
 df = df.join(socio.drop("community_area_name"), on="community_area_num", how="left")
 
-# ── group labels ──────────────────────────────────────────────────────────────
 df = df.withColumn("hardship_group",
     when(col("hardship_index") <= 33, "low")
    .when(col("hardship_index") <= 66, "medium")
@@ -86,7 +84,7 @@ df = df.withColumn("income_group",
    .when(col("per_capita_income") <= 35000, "medium")
    .otherwise("high"))
 
-# ── EDA ───────────────────────────────────────────────────────────────────────
+
 print("crime volume by hardship group")
 df.groupBy("hardship_group").agg(
     count("*").alias("total_crimes"),
@@ -112,7 +110,7 @@ df.groupBy("income_group").agg(
     spark_round(100.0 * spark_sum(col("arrest").cast("int")) / count("*"), 2).alias("arrest_pct")
 ).orderBy("income_group").show()
 
-# ── fairness metrics ──────────────────────────────────────────────────────────
+# fairness metrics
 df = df.withColumn("date_parsed", to_date(col("Date"), "MM/dd/yyyy hh:mm:ss a")) \
        .withColumn("week", weekofyear(col("date_parsed"))) \
        .withColumn("yr",   year(col("date_parsed")))

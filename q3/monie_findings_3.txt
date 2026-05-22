@@ -1,11 +1,19 @@
 Task 3 Findings: Crime Prediction at the Beat Level
 
-Two models were trained: Gradient Boosted Trees (GBT) and Random Forest (RF), both using lag features, a rolling average, week of year, month, and a violent crime ratio.
+Two models were trained to predict weekly crime counts at the beat level: Gradient Boosted Trees (GBT) and Random Forest (RF). Both used lag features (1, 2, and 4 weeks back), a 4-week rolling average, week of year, month number, a violent crime ratio, and three exogenous socioeconomic features from the Census Data - Selected Socioeconomic Indicators dataset (poverty rate, per capita income, hardship index).
+
+Violent crimes were identified using the official CPD IUCR code list (https://data.cityofchicago.org/widgets/c7ck-438e), specifically codes marked as Index crimes covering homicide, criminal sexual assault, robbery, aggravated battery, aggravated assault, and human trafficking. These were used to compute a violent crime ratio per beat per week, which upweights the target variable for beats with more violent activity.
 
 Results:
-  GBT: RMSE 5.631, R2 0.448
-  RF:  RMSE 5.594, R2 0.456
+  GBT: RMSE 4.916, R2 0.434
+  RF:  RMSE 4.942, R2 0.427
 
-Random Forest performed slightly better on both metrics. An R2 of around 0.45 means the models explain about 45% of the variance in weekly beat-level counts. The RMSE of about 5.6 means predictions are off by around 5-6 crimes per week per beat on average.
+GBT performed slightly better than RF this time. An R2 of around 0.43 means the models explain about 43% of the variance in weekly beat-level counts. The RMSE of about 4.9 means predictions are off by roughly 5 crimes per beat per week on average.
 
-The lag features were the strongest predictors since recent crime history at a beat is the best signal for near-term activity. One thing to note is that the test set falls in early 2020, which was an unusual period due to COVID, so performance may be lower than it would be in a typical year.
+GBT performance by beat violence level:
+  high violence beats: RMSE 5.225, R2 0.325 (n=626)
+  low violence beats:  RMSE 4.460, R2 0.407 (n=460)
+
+High violence beats are harder to predict than low violence beats, with higher RMSE and lower R2. This makes sense since violent crime is more event-driven and volatile than property crime, which tends to follow more stable patterns. The upweighting in the target variable means the model prioritizes getting these beats right, but the inherent unpredictability of violent crime means errors are still larger there.
+
+The addition of the exogenous socioeconomic features (poverty rate, per capita income, hardship index) improved RMSE from 5.63 in the baseline model to 4.92, suggesting that neighborhood-level context meaningfully helps predict crime at the beat level.

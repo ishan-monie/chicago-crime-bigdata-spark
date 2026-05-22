@@ -4,14 +4,13 @@ from pyspark.sql.functions import (
     to_timestamp, when, round as spark_round
 )
 
-# ── Init ──────────────────────────────────────────────────────────────────────
 spark = SparkSession.builder.appName("CrimeArrestPatterns").getOrCreate()
 sc = spark.sparkContext
 sc.setLogLevel("ERROR")
 
 DATA_PATH = "hdfs:///user/eil8095/crime/Crimes_-_2001_to_present.csv"
 
-# ── Load ──────────────────────────────────────────────────────────────────────
+# Load
 df = spark.read.csv(DATA_PATH, header=True, inferSchema=True)
 
 df = df.select(
@@ -44,7 +43,7 @@ df.createOrReplaceTempView("crimes")
 
 output_lines = []
 
-# ── Pattern 1: Arrest rate by hour of day ────────────────────────────────────
+# Pattern 1: Arrest rate by hour of day
 print("\n=== Arrest Rate by Hour of Day ===")
 by_hour = spark.sql("""
     SELECT hr,
@@ -59,7 +58,7 @@ by_hour.show(24)
 output_lines.append("=== Arrest Rate by Hour of Day ===")
 output_lines.append("\n".join([str(r) for r in by_hour.collect()]))
 
-# ── Pattern 2: Arrest rate by day of week ────────────────────────────────────
+# Pattern 2: Arrest rate by day of week 
 print("\n=== Arrest Rate by Day of Week ===")
 by_dow = spark.sql("""
     SELECT dow,
@@ -77,7 +76,7 @@ by_dow.show()
 output_lines.append("\n=== Arrest Rate by Day of Week ===")
 output_lines.append("\n".join([str(r) for r in by_dow.collect()]))
 
-# ── Pattern 3: Arrest rate by month ──────────────────────────────────────────
+# Pattern 3: Arrest rate by month
 print("\n=== Arrest Rate by Month ===")
 by_month = spark.sql("""
     SELECT mo,
@@ -92,7 +91,7 @@ by_month.show(12)
 output_lines.append("\n=== Arrest Rate by Month ===")
 output_lines.append("\n".join([str(r) for r in by_month.collect()]))
 
-# ── Pattern 4: Arrest rate by time of day ────────────────────────────────────
+# Pattern 4: Arrest rate by time of day
 print("\n=== Arrest Rate by Time of Day ===")
 by_tod = spark.sql("""
     SELECT time_of_day,
@@ -107,7 +106,7 @@ by_tod.show()
 output_lines.append("\n=== Arrest Rate by Time of Day ===")
 output_lines.append("\n".join([str(r) for r in by_tod.collect()]))
 
-# ── Pattern 5: Top crime types by arrest rate ─────────────────────────────────
+# Pattern 5: Top crime types by arrest rate
 print("\n=== Top Crime Types by Arrest Rate (min 1000 events) ===")
 by_type = spark.sql("""
     SELECT crime_type,
@@ -124,7 +123,7 @@ by_type.show(truncate=False)
 output_lines.append("\n=== Top Crime Types by Arrest Rate (min 1000 events) ===")
 output_lines.append("\n".join([str(r) for r in by_type.collect()]))
 
-# ── Pattern 6: Heatmap data — dow x hour arrest rate ─────────────────────────
+# Pattern 6: Heatmap data — dow x hour arrest rate
 print("\n=== Arrest Rate Heatmap: Day x Hour ===")
 heatmap = spark.sql("""
     SELECT dow, hr,
@@ -136,7 +135,6 @@ heatmap = spark.sql("""
 output_lines.append("\n=== Arrest Rate Heatmap: Day x Hour ===")
 output_lines.append("\n".join([str(r) for r in heatmap.collect()]))
 
-# ── Save ──────────────────────────────────────────────────────────────────────
 with open("monie_4.txt", "w") as f:
     f.write("\n".join(output_lines))
 

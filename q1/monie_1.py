@@ -1,22 +1,16 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import month, year, count, avg
 
-# ── Init ──────────────────────────────────────────────────────────────────────
 spark = SparkSession.builder.appName("CrimeHistogram").getOrCreate()
 sc = spark.sparkContext
 sc.setLogLevel("ERROR")
-
-# ── Load data ─────────────────────────────────────────────────────────────────
-# Copy from /home/public/crime into HDFS first:
-#   hdfs dfs -copyFromLocal /home/public/crime/Crimes_-_2001_to_present.csv /user/eil8095/crime/
 DATA_PATH = "hdfs:///user/eil8095/crime/Crimes_-_2001_to_present.csv"
 
 df = spark.read.csv(DATA_PATH, header=True, inferSchema=True)
 
-# ── Register as SQL table ─────────────────────────────────────────────────────
 df.createOrReplaceTempView("crimes")
 
-# ── SparkSQL: count events per (year, month) ──────────────────────────────────
+# SparkSQL: count events per (year, month)
 monthly_counts = spark.sql("""
     SELECT
         YEAR(TO_DATE(Date, 'MM/dd/yyyy hh:mm:ss a')) AS yr,
@@ -29,7 +23,7 @@ monthly_counts = spark.sql("""
 
 monthly_counts.createOrReplaceTempView("monthly_counts")
 
-# ── SparkSQL: average across years for each month ─────────────────────────────
+# SparkSQL: average across years for each month
 avg_by_month = spark.sql("""
     SELECT
         mo AS month,
@@ -41,10 +35,10 @@ avg_by_month = spark.sql("""
 
 avg_by_month.show(12)
 
-# ── ASCII histogram ───────────────────────────────────────────────────────────
+# ASCII histogram
 rows = avg_by_month.collect()
 max_val = max(r["avg_events"] for r in rows)
-bar_width = 50  # max bar width in chars
+bar_width = 50
 
 MONTH_NAMES = [
     "", "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -64,11 +58,10 @@ for r in rows:
 histogram_str = "\n".join(lines)
 print(histogram_str)
 
-# ── Save output ───────────────────────────────────────────────────────────────
+# Save output
 with open("monie_1.txt", "w") as f:
     f.write(histogram_str + "\n")
 
-# Also save as HDFS text (optional)
 avg_by_month.coalesce(1).write.mode("overwrite").option(
     "header", True
 ).csv("hdfs:///user/eil8095/output/task1")

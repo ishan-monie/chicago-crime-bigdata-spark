@@ -1,30 +1,37 @@
-Task 3 – Crime Prediction at Beat Level (Next Week)
+Task 3 - Crime Prediction at Beat Level (Next Week)
+Exogenous dataset: Census Data - Socioeconomic Indicators by Community Area
 
-Train rows : 279,927
-Test rows  : 1,086
+Train rows: 268,036
+Test rows:  1,086
 
 Model Performance:
-  GBT  — RMSE: 5.631  |  MAPE: 0.448
-  RF   — RMSE: 5.594  |  MAPE: 0.456
+  GBT: RMSE 4.916  |  R2 0.434
+  RF:  RMSE 4.942  |  R2 0.427
 
-Sample predictions (GBT) — first 20 beats:
-Row(Beat='1011', yr=2020, week=14, weighted_crimes=36.0, prediction=32.51779115351103)
-Row(Beat='1011', yr=2020, week=15, weighted_crimes=35.0, prediction=32.28970165764354)
-Row(Beat='1011', yr=2020, week=16, weighted_crimes=21.0, prediction=31.78290388817532)
-Row(Beat='1011', yr=2020, week=17, weighted_crimes=42.0, prediction=27.296934478035993)
-Row(Beat='1012', yr=2020, week=14, weighted_crimes=8.0, prediction=12.751298091294142)
-Row(Beat='1012', yr=2020, week=15, weighted_crimes=11.0, prediction=13.945108980683345)
-Row(Beat='1012', yr=2020, week=16, weighted_crimes=14.0, prediction=11.704091204894087)
-Row(Beat='1012', yr=2020, week=17, weighted_crimes=12.0, prediction=9.814913860817745)
-Row(Beat='1013', yr=2020, week=14, weighted_crimes=20.0, prediction=21.392958540022498)
-Row(Beat='1013', yr=2020, week=15, weighted_crimes=23.0, prediction=24.82443966761158)
-Row(Beat='1013', yr=2020, week=16, weighted_crimes=14.0, prediction=20.38664505276045)
-Row(Beat='1013', yr=2020, week=17, weighted_crimes=24.0, prediction=19.804875678597686)
-Row(Beat='1014', yr=2020, week=14, weighted_crimes=12.0, prediction=23.956741851176794)
-Row(Beat='1014', yr=2020, week=15, weighted_crimes=21.0, prediction=23.267936873514106)
-Row(Beat='1014', yr=2020, week=16, weighted_crimes=15.000000000000002, prediction=21.085131032502918)
-Row(Beat='1014', yr=2020, week=17, weighted_crimes=15.0, prediction=18.406513348168076)
-Row(Beat='1021', yr=2020, week=14, weighted_crimes=23.0, prediction=23.968799369364582)
-Row(Beat='1021', yr=2020, week=15, weighted_crimes=21.0, prediction=25.49916014582881)
-Row(Beat='1021', yr=2020, week=16, weighted_crimes=17.0, prediction=23.79276242875697)
-Row(Beat='1021', yr=2020, week=17, weighted_crimes=14.0, prediction=21.007739210313897)
+Note: MAPE metric not available in this Spark version, R2 reported instead.
+
+Sample predictions (GBT) - first 20 beats:
+Row(Beat='1011', yr=2020, week=14, weighted_crimes=29.999999999999996, prediction=28.498756777038167)
+Row(Beat='1011', yr=2020, week=15, weighted_crimes=29.0, prediction=28.362487219984953)
+Row(Beat='1011', yr=2020, week=16, weighted_crimes=19.0, prediction=27.037097400908564)
+Row(Beat='1011', yr=2020, week=17, weighted_crimes=34.0, prediction=24.157751340168954)
+Row(Beat='1012', yr=2020, week=14, weighted_crimes=9.0, prediction=14.615860125300323)
+Row(Beat='1012', yr=2020, week=15, weighted_crimes=9.0, prediction=9.968687436637596)
+Row(Beat='1012', yr=2020, week=16, weighted_crimes=11.0, prediction=12.601343634511348)
+Row(Beat='1012', yr=2020, week=17, weighted_crimes=13.0, prediction=12.549004427555419)
+Row(Beat='1013', yr=2020, week=14, weighted_crimes=17.0, prediction=20.051887498670688)
+Row(Beat='1013', yr=2020, week=15, weighted_crimes=18.0, prediction=17.728833498168854)
+Row(Beat='1013', yr=2020, week=16, weighted_crimes=14.0, prediction=18.75045697852204)
+Row(Beat='1013', yr=2020, week=17, weighted_crimes=23.0, prediction=18.093811892612226)
+Row(Beat='1014', yr=2020, week=14, weighted_crimes=12.0, prediction=23.883074858598516)
+Row(Beat='1014', yr=2020, week=15, weighted_crimes=19.0, prediction=20.169831695437722)
+Row(Beat='1014', yr=2020, week=16, weighted_crimes=14.0, prediction=18.69830463278188)
+Row(Beat='1014', yr=2020, week=17, weighted_crimes=15.0, prediction=18.47467807953364)
+Row(Beat='1021', yr=2020, week=14, weighted_crimes=20.0, prediction=20.90544112774054)
+Row(Beat='1021', yr=2020, week=15, weighted_crimes=18.0, prediction=20.841571082903958)
+Row(Beat='1021', yr=2020, week=16, weighted_crimes=13.0, prediction=15.441332180095364)
+Row(Beat='1021', yr=2020, week=17, weighted_crimes=11.0, prediction=17.78671645380676)
+
+GBT performance by beat violence level:
+  high_violence: RMSE 5.225  |  R2 0.325  (n=626)
+  low_violence: RMSE 4.460  |  R2 0.407  (n=460)

@@ -2,12 +2,12 @@ Task 2 Findings: Top Blocks, Beat Correlations, Mayor Comparison
 
 Part 1: Top 10 Blocks (2018-2020)
 
-The highest crime blocks are clustered around downtown Chicago, with addresses like 0000X W and 001XX N showing up at the top. The 079XX S block also appears, which is on the South Side. The downtown blocks are likely driven by retail and transit activity while the South Side block reflects residential crime.
+The highest crime block was 001XX N State St with 2,293 events, followed by 008XX N Michigan Ave (1,072) and 0000X W Terminal St (948). State St and Michigan Ave are two of the busiest commercial corridors in downtown Chicago, with high foot traffic, retail, and transit activity. O'Hare St (100XX W) at 685 events reflects crime activity around the airport. The South Side blocks on MLK Jr Dr (573) and Cicero Ave (572) round out the top 10, representing a different pattern of residential and neighborhood crime compared to the downtown commercial blocks.
 
 Part 2: Beat Correlations (2016-2020)
 
-Beats 0411 and 1214 came out with a perfect 1.0 correlation, and most of the top 20 pairs were above 0.999. The correlations are high enough that they seem to reflect a city-wide trend rather than purely local effects. Beat 0411 is in District 4 on the South Side and beat 1214 is in District 12 on the Near West Side, so they are not geographically adjacent. This supports the interpretation that the correlation is driven by shared city-wide crime trends rather than spillover between neighboring beats.
+Beats 0411 and 1214 came out with a perfect 1.0 correlation, and most of the top 20 pairs were above 0.999. The correlations are high enough that they seem to reflect a city-wide trend rather than purely local effects. Using the beat boundary coordinates from the Chicago Data Portal, beat 0411 is located at approximately 41.758N (South Side) and beat 1214 is at approximately 41.896N (North/Northwest Side), around 9 miles apart. They are not geographically adjacent, which confirms the correlation is driven by shared city-wide crime trends rather than spillover between neighboring beats.
 
 Part 3: Daley vs Emanuel
 
-Crime dropped significantly between the two mayors. Daley averaged about 436,000 crimes per year compared to Emanuel at 281,000, a reduction of around 35%. The biggest change was in narcotics, which fell from 552,252 under Daley to 175,362 under Emanuel. Theft remained the top crime type under both.
+Crime dropped significantly between the two mayors. Daley averaged about 436,000 crimes per year compared to Emanuel at 281,000, a reduction of around 35%. The biggest change was in narcotics, which fell from 552,252 under Daley to 175,362 under Emanuel, a drop of 68%. Theft remained the top crime type under both mayors.
