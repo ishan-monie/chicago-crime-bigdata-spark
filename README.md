@@ -1,24 +1,25 @@
-# Homework 3
+# Homework 3 - Crime in Chicago
 **Ishan Monie**
 
 ## Structure
 
 ```
 hw3/
-├── code/
+├── q1/
 │   ├── monie_1.py
-│   ├── monie_2.py
-│   ├── monie_3.py
-│   └── monie_4.py
-├── output/
 │   ├── monie_1.txt
+│   └── monie_findings_1.txt
+├── q2/
+│   ├── monie_2.py
 │   ├── monie_2.txt
+│   └── monie_findings_2.txt
+├── q3/
+│   ├── monie_3.py
 │   ├── monie_3.txt
-│   └── monie_4.txt
-├── findings/
-│   ├── monie_findings_1.txt
-│   ├── monie_findings_2.txt
-│   ├── monie_findings_3.txt
+│   └── monie_findings_3.txt
+├── q4/
+│   ├── monie_4.py
+│   ├── monie_4.txt
 │   └── monie_findings_4.txt
 ├── bias/
 │   ├── monie_bias.py

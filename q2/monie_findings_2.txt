@@ -6,7 +6,7 @@ The highest crime blocks are clustered around downtown Chicago, with addresses l
 
 Part 2: Beat Correlations (2016-2020)
 
-Beats 0411 and 1214 came out with a perfect 1.0 correlation, and most of the top 20 pairs were above 0.999. The correlations are high enough that they seem to reflect a city-wide trend rather than purely local effects. Beats 0411 and 1214 are in different districts so they are not geographically adjacent, which supports that interpretation. The adjacency check was done using the CPD beat map at https://chicagopd.hub.arcgis.com.
+Beats 0411 and 1214 came out with a perfect 1.0 correlation, and most of the top 20 pairs were above 0.999. The correlations are high enough that they seem to reflect a city-wide trend rather than purely local effects. Beat 0411 is in District 4 on the South Side and beat 1214 is in District 12 on the Near West Side, so they are not geographically adjacent. This supports the interpretation that the correlation is driven by shared city-wide crime trends rather than spillover between neighboring beats.
 
 Part 3: Daley vs Emanuel
 
